@@ -1,0 +1,23 @@
+{
+  "name": "githubwikisearch",
+  "version": "1.0.0",
+  "description": "A standalone express app that gives you full text search functionality for any GitHub backed Wiki.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nathankleyn/githubwikisearch"
+  },
+  "keywords": [
+    "search",
+    "github",
+    "wiki"
+  ],
+  "author": "Nathan Kleyn <nathan@nathankleyn.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nathankleyn/githubwikisearch/issues"
+  }
+}
