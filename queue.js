@@ -24,7 +24,7 @@ else {
   jobs = kue.createQueue();
 
   repoString = function(username, repo) {
-    return username + '/' + repo ;
+    return username + '/' + repo;
   };
 
   repoPath = function(username, repo) {
@@ -52,7 +52,6 @@ else {
         thisRepoString = repoString(username, repo),
         thisRepoPath = repoPath(username, repo);
 
-    // FIXME: Support more than just Markdown.
     glob(thisRepoPath + '/**/*.*', function(err, files) {
       var dfds = [];
 
