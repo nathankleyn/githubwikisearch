@@ -19,5 +19,17 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/nathankleyn/githubwikisearch/issues"
+  },
+  "dependencies": {
+    "express": "~3.4.0",
+    "glob": "~3.2.6",
+    "hiredis": "~0.1.15",
+    "jade": "~0.35.0",
+    "kue": "~0.6.2",
+    "marked": "~0.2.9",
+    "q": "~0.9.7",
+    "redis": "~0.8.6",
+    "reds": "~0.2.4",
+    "shell-escape": "~0.0.1"
   }
 }
