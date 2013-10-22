@@ -1,7 +1,9 @@
 var redisClient, jobs,
+    _ = require('underscore'),
     cluster = require('cluster'),
     express = require('express'),
     kue = require('kue'),
+    path = require('path'),
     reds = require('reds'),
     redis = require('redis'),
 
@@ -16,9 +18,6 @@ if (cluster.isMaster) {
 
   if (app.settings.env === 'production') {
     workerCount = require('os').cpus().length;
-  }
-  else {
-    redisClient.flushall();
   }
 
   for (var i = 0; i < workerCount; i++) {
@@ -37,7 +36,7 @@ else {
    * Pretty homepage goodness.
    */
   app.get('/', function(req, res) {
-    res.send('Hello World');
+    res.send(403);
   });
 
   /**
@@ -63,19 +62,11 @@ else {
       }
 
       if (wasSet) {
-        var job = jobs.create('repoClone', {
+        var job = jobs.create('cloneRepo', {
           title: 'Clone the "' + username + '/' + repo + '" GitHub repo.',
           username: username,
           repo: repo
         }).save();
-
-        job.on('complete', function() {
-          jobs.create('indexRepo', {
-            title: 'Index the "' + username + '/' + repo + '" GitHub repo.',
-            username: username,
-            repo: repo
-          }).save();
-        });
 
         // render success
         res.send('success');
@@ -89,7 +80,8 @@ else {
 
   app.get('/search', function(req, res) {
     // FIXME: Sanitise these strings.
-    var username = req.query['wiki-username'],
+    var files, urls,
+        username = req.query['wiki-username'],
         repo = req.query['wiki-repo'],
         q = req.query.q,
 
@@ -101,7 +93,31 @@ else {
         return false;
       }
 
-      res.send(ids);
+      files = _.uniq(ids.map(function(id) {
+        return id.split(':')[0];
+      }));
+
+      urls = files.reduce(function(acc, file) {
+        var ext = path.extname(file),
+            pageName = path.basename(file, ext),
+            url = "https://github.com/" + username + '/' + repo + '/wiki';
+
+        if (pageName === '_Sidebar' || pageName === '_Footer' || pageName === '_Header') {
+          return acc;
+        }
+
+        if (pageName !== 'Home') {
+          url += '/' + pageName;
+        }
+
+        acc.push(url);
+        return acc;
+      }, []);
+
+      res.render('search', {
+        query: q,
+        urls: urls
+      });
     });
   });
 

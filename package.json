@@ -29,6 +29,7 @@
     "q": "~0.9.7",
     "redis": "~0.8.6",
     "reds": "~0.2.4",
-    "shell-escape": "~0.0.1"
+    "shell-escape": "~0.0.1",
+    "underscore": "~1.5.2"
   }
 }

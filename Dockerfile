@@ -1,0 +1,2 @@
+FROM schmidh/arch-base
+
