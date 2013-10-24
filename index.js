@@ -114,7 +114,7 @@ else {
             url = "https://github.com/" + username + '/' + repo + '/wiki';
 
         if (pageName === '_Sidebar' || pageName === '_Footer' || pageName === '_Header') {
-          return acc;
+          return;
         }
 
         if (pageName !== 'Home') {
