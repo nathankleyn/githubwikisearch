@@ -94,7 +94,7 @@ else {
     var dfds = [],
         username = req.query['wiki-username'],
         repo = req.query['wiki-repo'],
-        query = req.query.q,
+        query = req.query['wiki-q'],
 
         search = reds.createSearch(username + '/' + repo);
 
