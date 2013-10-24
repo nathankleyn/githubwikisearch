@@ -62,7 +62,7 @@ else {
   jobs.process('cloneRepo', function(job, done) {
     var username = job.data.username,
         repo = job.data.repo,
-        gitUrl = 'git@github.com:' + repoString(username, repo) + '.wiki.git',
+        gitUrl = 'git://github.com/' + repoString(username, repo) + '.wiki.git',
         destinationPath = repoPath(username, repo);
 
     console.log('Clone repo job running...');
