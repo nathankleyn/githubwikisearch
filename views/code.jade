@@ -1,0 +1,16 @@
+extends main_layout
+
+block content
+  h3 Ready!
+  p
+    | Copy HTML below and paste it in any files in your GitHub Wiki where you want the search to show. You can wrap it in a&nbsp;
+    code= '<center>'
+    | &nbsp;tag to position the form in the middle.
+  p
+    strong Tip:&nbsp;
+    | Add this code snippet to a file called&nbsp;
+    code _Sidebar.md
+    | &nbsp;and it'll be on all of your wiki pages!
+
+  p
+    code.code-block!= "&lt;form&nbsp;action=&quot;http://githubwikisearch.com/search&quot;&gt;<br/>&nbsp;&nbsp;&lt;input&nbsp;type=&quot;hidden&quot;&nbsp;name=&quot;username&quot;&nbsp;value=&quot;" + username + "&quot;&nbsp;/&gt;<br/>&nbsp;&nbsp;&lt;input&nbsp;type=&quot;hidden&quot;&nbsp;name=&quot;repo&quot;&nbsp;value=&quot;" + repo + "&quot;&nbsp;/&gt;<br/>&nbsp;&nbsp;&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;q&quot;&nbsp;size=&quot;16&quot;&nbsp;/&gt;&amp;nbsp;&lt;button&nbsp;class=&quot;button&quot;&gt;&lt;span&nbsp;class=&quot;octicon&nbsp;octicon-search&quot;&gt;&lt;/span&gt;&lt;/button&gt;<br/>&lt;/form&gt;"

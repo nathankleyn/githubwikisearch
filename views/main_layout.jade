@@ -1,0 +1,31 @@
+doctype 5
+html(lang="en")
+  head
+    title GitHub Wiki Search - #{title}
+    block styles
+      link(rel = 'stylesheet', href = 'http://fonts.googleapis.com/css?family=Bitter|Bevan')
+      link(rel = 'stylesheet', href = '/static/css/normalize.css')
+      link(rel = 'stylesheet', href = '/static/css/app.css')
+
+    block scripts
+      script(src = '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+      script(src = '/static/js/jquery.typer.js')
+      script(src = '/static/js/app.js')
+
+  body
+    header
+      hgroup
+        h1
+          a(href = '/') GitHubWikiSearch
+        h2(data-typer-targets = 'it takes seconds to setup,it updates whenever you update,is really simple search for GitHub wikis') is really simple search for GitHub wikis
+
+    main
+      block content
+
+    footer
+      p
+        | Made by&nbsp;
+        a(href = 'http://nathankleyn.com') Nathan Kleyn
+        | &nbsp;&mdash;&nbsp;
+        a(href = 'https://github.com/nathankleyn/githubwikisearch') open-sourced on GitHub
+        | !

@@ -1,0 +1,106 @@
+body {
+  color: #333;
+  font-size: 62.5%;
+}
+
+header {
+  background: #82c8a0;
+  color: #FFF;
+}
+
+hgroup, main, footer {
+  margin: 0 auto;
+  padding: 20px 0;
+  width: 960px;
+}
+
+h1 {
+  font: 9em Bevan;
+  font-weight: normal;
+  margin-bottom: 0;
+}
+
+h1 a {
+  color: #FFF;
+  position: relative;
+  text-decoration: none;
+  text-shadow: 5px 5px #68A080;
+}
+
+h1 a:hover {
+  text-shadow: 5px 5px #538066;
+}
+
+h2 {
+  font: 5em Bitter;
+  font-weight: normal;
+  margin-top: 0;
+}
+
+main {
+  font: 3em/1.5 Bitter;
+}
+
+form {
+  text-align: center;
+}
+
+.form-bullet {
+  background: #EEE;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+input {
+  background: transparent;
+  border: 0;
+  border-bottom: 2px dotted #222;
+  margin: 0 10px;
+  width: 270px;
+}
+
+button {
+  background: #82c8a0;
+  border: 0;
+  border-bottom: 5px solid #68A080;
+  color: #FFF;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+button:hover {
+  border-bottom-color: #538066;
+}
+
+button:active {
+  border-bottom: 0;
+  margin-top: 25px;
+}
+
+code {
+  background: #EEE;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.code-block {
+  display: block;
+  overflow: auto;
+  padding: 20px;
+}
+
+footer {
+  border-top: 1px solid #EEE;
+  color: #CCC;
+  font: 2em Bitter;
+  margin-top: 80px;
+  text-align: center;
+}
+
+footer a {
+  color: #CCC;
+}
+
+footer a:hover {
+  color: #BBB;
+}

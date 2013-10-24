@@ -1,4 +1,26 @@
-h1= "Search Results For '" + query + "'"
-each url in urls
-  p
-    a(href = url)= url
+extends search_layout
+
+block content
+  h1= "Search results in '" + username + '/' + repo + "' for '" + query + "'"
+
+  form
+    input(name = 'wiki-username', type = 'hidden', value = username)
+    input(name = 'wiki-repo', type = 'hidden', value = repo)
+    input(name = 'q', type = 'text', value = query)
+    button Search
+
+  section
+    if results.length > 0
+      ol
+        each result in results
+          li
+            .details
+              a.search-result-title(href = result.url)
+                span= result.title
+              | &nbsp;&mdash;&nbsp;
+              a.search-result-url(href = result.url)
+                span= result.url
+            .search-result-match= result.content
+    else
+      .no-results
+        h2 Oh dear, there were no results for that search &mdash; maybe try another?

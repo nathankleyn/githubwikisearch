@@ -40,6 +40,7 @@ if (cluster.isMaster) {
 
   // Schedule an update or all repos every 15 minutes.
   setInterval(updateRepos, 1000 * 60 * 15);
+  updateRepos();
 }
 else {
   repoString = function(username, repo) {

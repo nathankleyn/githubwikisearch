@@ -2,8 +2,11 @@ var redisClient, jobs,
     _ = require('underscore'),
     cluster = require('cluster'),
     express = require('express'),
+    fs = require('fs'),
     kue = require('kue'),
+    lazy = require('lazy'),
     path = require('path'),
+    q = require('q'),
     reds = require('reds'),
     redis = require('redis'),
 
@@ -29,6 +32,7 @@ else {
   app.disable('x-powered-by');
 
   app.use(express.bodyParser());
+  app.use('/static', express.static('./public'));
 
   jobs = kue.createQueue();
 
@@ -36,7 +40,14 @@ else {
    * Pretty homepage goodness.
    */
   app.get('/', function(req, res) {
-    res.send(403);
+    res.render('index');
+  });
+
+  app.post('/', function(req, res) {
+    res.render('code', {
+      username: req.body.username,
+      repo: req.body.repo
+    });
   });
 
   /**
@@ -80,25 +91,25 @@ else {
 
   app.get('/search', function(req, res) {
     // FIXME: Sanitise these strings.
-    var files, urls,
+    var dfds = [],
         username = req.query['wiki-username'],
         repo = req.query['wiki-repo'],
-        q = req.query.q,
+        query = req.query.q,
 
         search = reds.createSearch(username + '/' + repo);
 
-    search.query(q).end(function(err, ids) {
+    search.query(query).end(function(err, ids) {
       if (err) {
         next(new Error('Search could not be run, looks to be a problem on our end! Bear with us as we fix it!'));
         return false;
       }
 
-      files = _.uniq(ids.map(function(id) {
-        return id.split(':')[0];
-      }));
-
-      urls = files.reduce(function(acc, file) {
-        var ext = path.extname(file),
+      ids.forEach(function(id, i) {
+        var dfd = q.defer(),
+            parts = id.split(':'),
+            file = parts[0],
+            line = parseInt(parts[1], 10),
+            ext = path.extname(file),
             pageName = path.basename(file, ext),
             url = "https://github.com/" + username + '/' + repo + '/wiki';
 
@@ -110,13 +121,26 @@ else {
           url += '/' + pageName;
         }
 
-        acc.push(url);
-        return acc;
+        dfds.push(dfd.promise);
+
+        lazy(fs.createReadStream(file)).lines.skip(line - 1).take(1).map(function(line) {
+          return line.toString();
+        }).join(function(lines) {
+          dfd.resolve({
+            url: url,
+            title: pageName.replace(/-/g, ' '),
+            content: lines.join('\n')
+          });
+        });
       }, []);
 
-      res.render('search', {
-        query: q,
-        urls: urls
+      q.all(dfds).then(function(results) {
+        res.render('search', {
+          query: query,
+          results: results,
+          username: username,
+          repo: repo
+        });
       });
     });
   });

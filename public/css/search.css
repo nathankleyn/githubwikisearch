@@ -1,0 +1,83 @@
+body {
+  border-top: 5px solid #82c8a0;
+  color: #444;
+  font-size: 62.5%;
+}
+
+main {
+  font: 2em/1.5 Bitter;
+  margin: 0 auto;
+  padding: 20px 0;
+  width: 960px;
+}
+
+h1 {
+  color: #111;
+  font-size: 2em;
+  font-weight: normal;
+}
+
+h2 {
+  font: 1.5em Bitter;
+}
+
+input, button {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+input {
+  border: 1px solid #BBB;
+  margin-right: 10px;
+  padding: 11.5px;
+  width: 600px;
+}
+
+button {
+  background: #82c8a0;
+  border: 0;
+  border-bottom: 5px solid #68A080;
+  color: #FFF;
+  padding: 10px;
+}
+
+button:hover {
+  border-bottom-color: #538066;
+}
+
+button:active {
+  border-bottom: 0;
+  margin-top: 5px;
+}
+
+section {
+  margin-top: 50px;
+}
+
+ol {
+  margin-left: -40px;
+}
+
+li {
+  color: #888;
+}
+
+.search-result-title {
+  color: #444;
+  text-decoration: none;
+}
+
+.search-result-url {
+  color: #BBB;
+  font-size: 0.8em;
+  text-decoration: none;
+}
+
+.search-result-match {
+  color: #BBB;
+  margin: 10px;
+}
+
+a:hover {
+  text-decoration: underline;
+}

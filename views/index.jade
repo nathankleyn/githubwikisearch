@@ -1,0 +1,14 @@
+extends main_layout
+
+block content
+  p Add search to your GitHub wiki in seconds! Simply fill in your GitHub username and repository name, and we'll give you some HTML to put in your wiki pages!
+
+  form(method = 'post')
+    .form-bullet
+      label
+        input(name = 'username', type = 'text', placeholder = 'GitHub Username')
+      | /
+      label
+        input(name = 'repo', type = 'text', placeholder = 'GitHub Repository')
+
+    button Gimme The Code
